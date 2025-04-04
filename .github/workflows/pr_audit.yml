@@ -4,42 +4,40 @@ name: PR Audit
 # It will run whenever a Pull Request is opened
 on: [pull_request]
 
-# This defines the set of steps to run
 jobs: 
   lint:
-    # Use a VM running Ubuntu
     runs-on: ubuntu-latest
 
-    # All the steps to do the job
-    
     steps:
-      # Step1: Download the code from pull request 
-      - name: Check code
+      # Step 1: Checkout the PR code
+      - name: Checkout code
         uses: actions/checkout@v4
-      # Step2: Set up Python(v3.11) in VM 
+
+      # Step 2: Set up Python (v3.11)
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      # Step3: Install the necessary tools to check the code
+
+      # Step 3: Install tools (flake8, black, isort)
       - name: Install tools
         run: |
-          pip install flake8 black isort reviewdog
+          pip install flake8 black isort
 
-      # Step4: Linting with flake8 and commenting with reviewdog
+      # Step 4: Linting with flake8 and commenting via reviewdog
       - name: Run flake8 for linting
         uses: reviewdog/action-flake8@v3
         with: 
-          github_token: ${{ secrets.GITHUB_TOKEN}}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review
           level: warning
           fail_on_error: true
           filter_mode: diff_context
-      # Step5: Check if the code is formatted using black
-      - name: Run Black
+
+      # Step 5: Check formatting with black
+      - name: Run black
         run: black . --check
-      #Step6: Check if imports are sorted correctly using isort
+
+      # Step 6: Check import sorting with isort
       - name: Run isort
         run: isort . --check-only
-
-
