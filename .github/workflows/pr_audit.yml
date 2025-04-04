@@ -36,7 +36,7 @@ jobs:
 
       # Step 5: Check formatting with black
       - name: Run black
-        run: black . -check
+        run: black . --check
 
       # Step 6: Check import sorting with isort
       - name: Run isort
