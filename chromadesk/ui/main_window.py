@@ -1,17 +1,29 @@
 # chromadesk/chromadesk/ui/main_window.py
+from urllib.parse import urlparse
 import logging  # Import logging
 from pathlib import Path
-from urllib.parse import urlparse
 
 from PySide6.QtCore import QSize, Qt, QTimer, QUrl, Slot
 from PySide6.QtGui import QDesktopServices, QIcon, QPalette, QPixmap
 from PySide6.QtWidgets import QCheckBox  # Added QMessageBox
 from PySide6.QtWidgets import QGroupBox  # Added QGroupBox
-from PySide6.QtWidgets import (QApplication, QComboBox, QHBoxLayout, QLabel,
-                               QLineEdit, QListWidget, QListWidgetItem,
-                               QMainWindow, QMessageBox, QPushButton,
-                               QSizePolicy, QStatusBar, QStyle, QVBoxLayout,
-                               QWidget)
+from PySide6.QtWidgets import (
+    QApplication,
+    QComboBox,
+    QHBoxLayout,
+    QLabel,
+    QLineEdit,
+    QListWidget,
+    QListWidgetItem,
+    QMainWindow,
+    QMessageBox,
+    QPushButton,
+    QSizePolicy,
+    QStatusBar,
+    QStyle,
+    QVBoxLayout,
+    QWidget,
+)
 
 # Add chromadesk import for version
 import chromadesk

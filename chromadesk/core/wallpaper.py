@@ -317,7 +317,9 @@ def set_gnome_wallpaper(image_path: Path) -> bool:
         try:
             logger.debug(f"Running command: {' '.join(cmd)}")
             # Run the command, check for non-zero exit code, capture output
-            subprocess.run(cmd, capture_output=True, text=True, check=True, timeout=10)
+            subprocess.run(
+                cmd, capture_output=True, text=True, check=True, timeout=10
+            )
             logger.debug("Command successful.")  # Keep success log concise
         except FileNotFoundError:
             logger.error(f"Command failed: '{cmd[0]}' not found. Check PATH.")
