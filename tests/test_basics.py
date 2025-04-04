@@ -1,6 +1,7 @@
 """
 Basic tests for ChromaDesk functionality.
 """
+
 import unittest
 
 

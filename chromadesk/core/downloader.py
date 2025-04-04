@@ -96,8 +96,8 @@ if __name__ == "__main__":
 
     from datetime import date
 
-    from .history import (ensure_wallpaper_dir,  # Import history functions
-                          get_wallpaper_dir)
+    from .history import ensure_wallpaper_dir  # Import history functions
+    from .history import get_wallpaper_dir
 
     # --- TEMPORARY MODIFICATION FOR TESTING HISTORY ---
     # Ensure the actual wallpaper directory exists
