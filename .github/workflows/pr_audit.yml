@@ -36,13 +36,8 @@ jobs:
 
       # Step 5: Check formatting with black
       - name: Run black
-        run: |
-        git fetch origin main
-        CHANGED_FILES=$(git diff --name-only origin/main | grep '\.py$' || true)
-        echo "$CHANGED_FILES" | xargs black --check
+        run: black . -check
 
       # Step 6: Check import sorting with isort
       - name: Run isort
-        run: |
-        CHANGED_FILES=$(git diff --name-only origin/main | grep '\.py$' || true)
-        echo "$CHANGED_FILES" | xargs isort --check-only
+        run: isort . --check-only
