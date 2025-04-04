@@ -2,9 +2,8 @@ import argparse
 import logging
 import os
 import sys
-from importlib.metadata import (
-    version as get_version,
-)  # Import earlier for version/internal commands
+from importlib.metadata import \
+    version as get_version  # Import earlier for version/internal commands
 from pathlib import Path
 
 # Import core config early for internal command use
@@ -247,6 +246,7 @@ def main():
         logger.info("Starting GUI application")
         try:
             from PySide6.QtWidgets import QApplication
+
             from chromadesk.ui.main_window import MainWindow
         except ImportError as e:
             logger.critical(f"Failed to import GUI components: {e}")
