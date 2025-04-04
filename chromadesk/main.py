@@ -2,8 +2,9 @@ import argparse
 import logging
 import os
 import sys
-from importlib.metadata import \
-    version as get_version  # Import earlier for version/internal commands
+from importlib.metadata import (
+    version as get_version,
+)  # Import earlier for version/internal commands
 from pathlib import Path
 
 # Import core config early for internal command use
