@@ -246,6 +246,7 @@ def main():
         logger.info("Starting GUI application")
         try:
             from PySide6.QtWidgets import QApplication
+
             from chromadesk.ui.main_window import MainWindow
         except ImportError as e:
             logger.critical(f"Failed to import GUI components: {e}")

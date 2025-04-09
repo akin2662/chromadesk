@@ -1,0 +1,63 @@
+name: PR Audit
+
+on:
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the PR code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # Step 3: Install tools
+      - name: Install tools
+        run: |
+          pip install flake8 black isort
+
+      # Step 4: Detect changed/added Python files
+      - name: Detect changed Python files
+        id: changed
+        run: |
+          git fetch origin main
+          FILES=$(git diff --name-only origin/main | grep '\.py$' || true)
+          echo "Changed Python files:"
+          echo "$FILES"
+          echo "CHANGED_PY_FILES<<EOF" >> $GITHUB_ENV
+          echo "$FILES" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      # Step 5: Run black
+      - name: Run black
+        run: |
+          if [ -n "$CHANGED_PY_FILES" ]; then
+            echo "$CHANGED_PY_FILES" | xargs black --check
+          else
+            echo "No Python files changed."
+          fi
+
+      # Step 6: Run isort
+      - name: Run isort
+        run: |
+          if [ -n "$CHANGED_PY_FILES" ]; then
+            echo "$CHANGED_PY_FILES" | xargs isort --check-only
+          else
+            echo "No Python files changed."
+          fi
+
+      # Step 7: Run flake8
+      - name: Run flake8
+        run: |
+          if [ -n "$CHANGED_PY_FILES" ]; then
+            echo "$CHANGED_PY_FILES" | xargs flake8
+          else
+            echo "No Python files changed."
+          fi
